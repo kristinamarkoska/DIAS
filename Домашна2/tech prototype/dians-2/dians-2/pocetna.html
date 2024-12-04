@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Invest MK</title>
+    <link rel="stylesheet" href="pocetna.css">
+    <!-- za da se vcita mapata -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+</head>
+
+<body>
+<nav class="navbar">
+    <ul>
+        <li><button id="toggle-dark-mode">Dark Mode</button></li>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#calendar">Calendar</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#map-section">Map</a></li>
+        <li><a href="#profile">Profile</a></li>
+        <li><a href="#login" class="login-btn">Log in</a></li>
+        <li><a href="#signup" class="signup-btn">Sign Up</a></li>
+    </ul>
+</nav>
+
+<!-- Копче Почетна -->
+<button id="back-to-top">Home</button>
+
+<!-- Почетна секција -->
+<section id="home" class="fullscreen-background"></section>
+
+<script>
+    document.getElementById('toggle-dark-mode').addEventListener('click', function() {
+        document.body.classList.toggle('dark-mode');
+    });
+</script>
+
+
+
+<!-- Секција со календар -->
+<section id="calendar" class="calendar-section">
+    <div class="calendar-container">
+        <div class="calendar-header">
+            <button id="prev-month">&lt;</button>
+            <h2 id="month-year"></h2>
+            <button id="next-month">&gt;</button>
+        </div>
+        <div class="calendar-days">
+            <div>Mon</div>
+            <div>Tue</div>
+            <div>Wed</div>
+            <div>Thu</div>
+            <div>Fri</div>
+            <div>Sat</div>
+            <div>Sun</div>
+        </div>
+        <div class="calendar-dates" id="calendar-dates"></div>
+    </div>
+</section>
+
+
+<!-- Други секции -->
+<section id="about">
+    <!--    <h1>About Us</h1>-->
+    <!--    <p>Learn more about us.</p>-->
+    <h1>Company Information</h1>
+    <table>
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>Activity</th>
+            <th>Address</th>
+            <th>City</th>
+            <th>Phone</th>
+            <th>Website</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>1</td>
+            <td>Alkaloid AD</td>
+            <td>Pharmaceutical Industry</td>
+            <td>Boulevard Aleksandar Makedonski 12</td>
+            <td>Skopje</td>
+            <td>+389 2 321 0111</td>
+            <td><a href="https://www.alkaloid.com.mk" target="_blank">www.alkaloid.com.mk</a></td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td>Komercijalna Banka</td>
+            <td>Banking</td>
+            <td>Orce Nikolov Street 3</td>
+            <td>Skopje</td>
+            <td>+389 2 329 6700</td>
+            <td><a href="https://www.kb.com.mk" target="_blank">www.kb.com.mk</a></td>
+        </tr>
+        <tr>
+            <td>3</td>
+            <td>Makpetrol AD</td>
+            <td>Energy</td>
+            <td>Boulevard Ilindenska 98</td>
+            <td>Skopje</td>
+            <td>+389 2 310 5555</td>
+            <td><a href="https://www.makpetrol.com.mk" target="_blank">www.makpetrol.com.mk</a></td>
+        </tr>
+        <tr>
+            <td>4</td>
+            <td>TTK Banka</td>
+            <td>Banking</td>
+            <td>50th Division Street 19</td>
+            <td>Skopje</td>
+            <td>+389 2 323 7777</td>
+            <td><a href="https://www.ttk.com.mk" target="_blank">www.ttk.com.mk</a></td>
+        </tr>
+        <tr>
+            <td>5</td>
+            <td>Granit AD</td>
+            <td>Construction</td>
+            <td>Boulevard Kocho Racin 27</td>
+            <td>Skopje</td>
+            <td>+389 2 311 8160</td>
+            <td><a href="https://www.granit.mk" target="_blank">www.granit.mk</a></td>
+        </tr>
+        <tr>
+            <td>6</td>
+            <td>EVN Macedonia</td>
+            <td>Energy Distribution</td>
+            <td>Boulevard 11th October 9</td>
+            <td>Skopje</td>
+            <td>+389 2 320 5111</td>
+            <td><a href="https://www.evn.mk" target="_blank">www.evn.mk</a></td>
+        </tr>
+        <tr>
+            <td>7</td>
+            <td>Adora Engineering</td>
+            <td>Real Estate</td>
+            <td>Boulevard Jane Sandanski 109</td>
+            <td>Skopje</td>
+            <td>+389 2 244 0220</td>
+            <td><a href="https://www.adora.com.mk" target="_blank">www.adora.com.mk</a></td>
+        </tr>
+        <tr>
+            <td>8</td>
+            <td>Stopanska Banka</td>
+            <td>Banking</td>
+            <td>Boulevard 11th October 6</td>
+            <td>Skopje</td>
+            <td>+389 2 310 5000</td>
+            <td><a href="https://www.stb.com.mk" target="_blank">www.stb.com.mk</a></td>
+        </tr>
+        <tr>
+            <td>9</td>
+            <td>Telekom MK</td>
+            <td>Telecommunications</td>
+            <td>Kej Dimitar Vlahov 4</td>
+            <td>Skopje</td>
+            <td>+389 2 123 4567</td>
+            <td><a href="https://www.telekom.mk" target="_blank">www.telekom.mk</a></td>
+        </tr>
+        <tr>
+            <td>10</td>
+            <td>Skopski Pazar</td>
+            <td>Retail and Market Management</td>
+            <td>Street Nikola Parapunov 15</td>
+            <td>Skopje</td>
+            <td>+389 2 205 0000</td>
+            <td><a href="https://www.skp.com.mk" target="_blank">www.skp.com.mk</a></td>
+        </tr>
+        </tbody>
+    </table>
+</section>
+
+
+<!-- Секција за МАПАТА -->
+<div id="map-section" class="container">
+    <h1>Search a company location</h1>
+    <div class="search-bar">
+        <input type="text" id="searchInput" placeholder="Search..." />
+        <button id="searchBtn">🔍</button>
+    </div>
+</div>
+
+<div id="map" style="height: 400px;"></div>
+
+
+
+<!-- Профил секција -->
+<section id="profile" class="profile-section">
+    <h1>Your Profile</h1>
+    <img src="Images-dom.2/profilna.png" alt="Profile Picture" class="profile-image">
+
+    <form>
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" placeholder="b.davcheva" disabled>
+
+        <label for="email">E-mail:</label>
+        <input type="email" id="email" name="email" placeholder="blagica.davcheva@students.finki.ukim.mk" disabled>
+
+        <label for="faq">FAQ:</label>
+        <textarea id="faq" name="faq" placeholder="List your frequently asked questions here..." disabled>
+            1. What are the main functions of the stock exchange?
+            2. How does stock exchange trading work?
+            3. Who can invest on the Macedonian stock exchange?
+            4. How are investors' rights protected?
+            5. Are there simulators for beginners to practice trading?
+            6. Do I need a broker to trade?
+        </textarea>
+
+        <button type="submit">Update Profile</button>
+    </form>
+</section>
+
+<!-- Log In секција -->
+<section id="login">
+    <h1>Log In</h1>
+    <p>Sign in to your account</p>
+    <form>
+        <label for="username">E-mail</label><br>
+        <input type="text" id="username" name="username" placeholder="Enter your email..." required><br>
+        <label for="password">Password:</label><br>
+        <input type="password" id="password" name="password" placeholder="Enter your password..." required><br>
+        <button type="submit">Log In</button>
+    </form>
+</section>
+
+<!-- Sign Up секција -->
+<section id="signup">
+    <h1>Sign Up</h1>
+    <p>Create New Account</p>
+    <form>
+        <label for="new-username">Name and Surname</label><br>
+        <input type="text" id="new-username" name="new-username" placeholder="Enter your Name and Surname..." required><br>
+        <label for="email">Email:</label><br>
+        <input type="email" id="email" name="email" placeholder="Enter your email..." required><br>
+        <label for="new-password">Password:</label><br>
+        <input type="password" id="new-password" name="new-password" placeholder="Enter your password..." required><br>
+        <button type="submit">Sign Up</button>
+    </form>
+</section>
+
+
+
+
+<section>
+    <button class="logo-button">Invest MK</button>
+</section>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=YOUR_GOOGLE_MAPS_API_KEY&callback=initMap" async defer></script>
+<script src="map.js"></script>
+<script src="calendar.js"></script>
+</body>
+</html>
